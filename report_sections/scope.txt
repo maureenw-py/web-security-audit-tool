@@ -1,0 +1,25 @@
+This assessment was limited to the target application and URLs explicitly provided by the client. Only publicly accessible interfaces and resources were evaluated unless otherwise agreed in writing.
+
+**The following were in scope:**
+
+- The provided target URL and its publicly reachable endpoints.
+
+- HTTP and HTTPS responses returned by the application.
+
+- Client-side content delivered to the browser.
+
+**The following were out of scope:**
+
+- Denial-of-service testing.
+
+- Social engineering or phishing attacks.
+
+- Password brute-force attacks.
+
+- Authenticated functionality (unless explicitly authorized).
+
+- Infrastructure, network, or host-level security testing.
+
+- Third-party services not directly controlled by the client.
+
+Testing was conducted in a non-intrusive manner and did not intentionally attempt to disrupt application availability.

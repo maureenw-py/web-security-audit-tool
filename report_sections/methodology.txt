@@ -1,0 +1,25 @@
+This security assessment was performed using an automated web application security auditing tool designed to identify common security misconfigurations, insecure practices, and potential exposure risks.
+
+The assessment involved sending HTTP and HTTPS requests to the target application and passively analyzing server responses, HTML content, headers, cookies, and publicly accessible resources. The tool performs both definitive checks, which confirm the presence or absence of a security control, and heuristic checks, which infer potential issues based on observed patterns.
+
+**The following areas were assessed during the scan:**
+
+- Transport security and SSL/TLS configuration
+
+- HTTP security headers and cookie attributes
+
+- Cross-origin resource sharing (CORS) policies
+
+- Content Security Policy (CSP) configuration
+
+- Client-side JavaScript usage and third-party integrations
+
+- Form handling and input security
+
+- Publicly accessible files, directories, and endpoints
+
+- Metadata disclosure and in-page comments
+
+- Redirect behavior and URL handling
+
+Findings are categorized by severity (High, Medium, Low, Informational) based on the potential security impact and likelihood of exploitation. Each finding includes supporting evidence where applicable, along with remediation guidance aligned with industry best practices.

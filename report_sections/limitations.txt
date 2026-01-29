@@ -1,0 +1,9 @@
+This assessment was conducted using automated techniques and is subject to inherent limitations associated with automated security testing.
+
+The scan does not perform authenticated testing unless explicitly configured and therefore may not identify vulnerabilities that are only present after authentication. Additionally, the tool does not execute exploit code or perform active attack techniques such as SQL injection exploitation, command execution, or privilege escalation.
+
+Some findings are based on heuristic analysis and may require manual verification to confirm their impact. The absence of a reported issue does not guarantee that the application is free from vulnerabilities.
+
+Environmental factors such as network connectivity issues, server-side protections, rate limiting, or non-standard configurations may affect the completeness or accuracy of certain checks.
+
+This report represents the security posture of the target only at the time of testing, and changes to the application or infrastructure after the scan may invalidate some findings.

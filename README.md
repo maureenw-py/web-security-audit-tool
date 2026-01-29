@@ -34,23 +34,25 @@ This tool assesses the following areas:
 
 ## Project Structure
 
+```
 web-security-audit-tool/
 ├── scanner/
-│ ├── scanner.py # CLI entry point, orchestration, logging
-│ ├── checks.py # Security checks and HTTP request logic
-│ └── render.py # Markdown and JSON report generation
-├── text_files/
-│ ├── methodology.txt
-│ ├── scope.txt
-│ ├── limitations.txt
-│ ├── disclaimer.txt
-│ └── conclusion.txt
+│   ├── scanner.py          # CLI entry point, orchestration, logging
+│   ├── checks.py            # Security checks and HTTP request logic
+│   └── render.py            # Markdown and JSON report generation
+├── report_sections/
+│   ├── methodology.txt
+│   ├── scope.txt
+│   ├── limitations.txt
+│   ├── disclaimer.txt
+│   └── conclusion.txt
 ├── example_output/
-│ ├── sample_report.md
-│ └── sample_report.json
+│   ├── sample_report.md
+│   └── sample_report.json
 ├── .gitignore
 ├── requirements.txt
 └── README.md
+```
 
 ---
 
