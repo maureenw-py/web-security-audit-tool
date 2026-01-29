@@ -1,0 +1,150 @@
+{
+  "scan_time": "",
+  "target": "example.com",
+  "summary": {
+    "check_types": {
+      "definitive": 3,
+      "heuristic": 5
+    },
+    "severity_count": {
+      "high": 0,
+      "info": 4,
+      "low": 1,
+      "medium": 3
+    },
+    "total_findings": 8
+  },
+  "findings": {
+    "client_side": [
+      {
+        "category": "client_side",
+        "check_type": "heuristic",
+        "confidence": "medium",
+        "evidence": {
+          "content": [
+            "<script language=\"JavaScript\" type=\"text/JavaScript\">\n<!--\nfunction MM_reloadPage(init) {  //reloads the window if Nav4 resized\n  if (init==true) with (navigator) {if ((appName==\"Netscape\")&&(parseInt(appVersion)==4)) {\n    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}\n  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();\n}\nMM_reloadPage(true);\n//-->\n</script>"
+          ]
+        },
+        "id": "695ca278-6f2f-4b8e-91f7-7388bacc8078",
+        "issue": "Inline JavaScript",
+        "recommendation": "Use a separate, external file for JavaScript",
+        "severity": "low",
+        "status": "found"
+      }
+    ],
+    "discovery": [
+      {
+        "category": "discovery",
+        "check_type": "heuristic",
+        "confidence": "low",
+        "id": "0d68f979-9eff-49ef-96d1-480d3d74aa5d",
+        "issue": "Sensitive file(s) exposed",
+        "reason": "failed connection to the following path(s): ['.git/', 'backup.zip', 'env', 'config.php']",
+        "severity": "info",
+        "status": "inconclusive"
+      },
+      {
+        "category": "discovery",
+        "check_type": "heuristic",
+        "confidence": "low",
+        "id": "769ee1b5-b7e1-4093-8578-daedc6852c37",
+        "issue": "robots.txt missing",
+        "reason": "failed connection",
+        "severity": "info",
+        "status": "inconclusive"
+      }
+    ],
+    "http_security": [
+      {
+        "category": "http_security",
+        "check_type": "definitive",
+        "confidence": "high",
+        "evidence": {
+          "Missing headers": [
+            "Referrer-Policy",
+            "Content-Security-Policy",
+            "Strict-Transport-Security",
+            "Permissions-Policy",
+            "X-Frame-Options",
+            "X-Content-Type-Options"
+          ]
+        },
+        "id": "a07c2bba-01a2-4cd9-9e10-cad55bb70dbf",
+        "impact": "Increased vulnerability to XSS, Clickjacking and MitM attacks",
+        "issue": "Missing security header(s)",
+        "recommendation": "Add missing header(s)",
+        "severity": "medium",
+        "status": "found"
+      },
+      {
+        "category": "http_security",
+        "check_type": "heuristic",
+        "confidence": "low",
+        "id": "ac5a7ad4-cea4-4e92-9393-00dac42a88a2",
+        "issue": "Missing HTTP to HTTPS redirect",
+        "reason": "failed connection",
+        "severity": "info",
+        "status": "inconclusive"
+      }
+    ],
+    "info_leak": [
+      {
+        "category": "info_leak",
+        "check_type": "definitive",
+        "confidence": "high",
+        "evidence": {
+          "comment(s)": [
+            " InstanceBegin template=\"/Templates/main_dynamic_template.dwt.php\" codeOutsideHTMLIsLocked=\"false\" ",
+            " InstanceBeginEditable name=\"document_title_rgn\" ",
+            " InstanceEndEditable ",
+            " InstanceBeginEditable name=\"headers_rgn\" ",
+            " here goes headers headers ",
+            " InstanceEndEditable ",
+            " end masthead ",
+            " begin content ",
+            " InstanceBeginEditable name=\"content_rgn\" ",
+            " InstanceEndEditable ",
+            "end content ",
+            "end navbar ",
+            " InstanceEnd "
+          ]
+        },
+        "id": "54a8f6f8-ddd2-4fb0-8757-e0f1a42705cc",
+        "impact": "Data exposure",
+        "issue": "Comments",
+        "recommendation": "Remove comments from the website code",
+        "severity": "medium",
+        "status": "found"
+      }
+    ],
+    "inputs": [
+      {
+        "category": "inputs",
+        "check_type": "definitive",
+        "confidence": "high",
+        "evidence": {
+          "form(s)": ["form", "form"]
+        },
+        "id": "b886515e-8301-4421-a1fd-11ebbf71e45e",
+        "impact": "Vulnerability to data manipulation and session hijacking",
+        "issue": "Insecure forms",
+        "recommendation": "Add a CSRF token",
+        "severity": "medium",
+        "status": "found"
+      }
+    ],
+    "redirects": [],
+    "ssl": [
+      {
+        "category": "ssl",
+        "check_type": "heuristic",
+        "confidence": "low",
+        "id": "bcb2f8a7-1b95-4b1f-97d4-684f42f15867",
+        "issue": "SSL certificate status",
+        "reason": "failed connection",
+        "severity": "info",
+        "status": "inconclusive"
+      }
+    ]
+  }
+}

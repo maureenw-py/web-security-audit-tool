@@ -1,0 +1,250 @@
+{
+  "Missing HTTP to HTTPS redirect": {
+    "found": {
+      "description": "The application does not automatically redirect HTTP traffic to HTTPS.",
+      "evidence": "A request to the HTTP endpoint returned a response without redirecting to HTTPS.",
+      "impact": "Sensitive data may be exposed to interception or manipulation by attackers.",
+      "recommendation": "Configure the web server to enforce HTTPS by redirecting all HTTP requests."
+    },
+    "inconclusive": {
+      "description": "The HTTPS redirect check could not be completed.",
+      "reason": "There was a failure to connect.",
+      "recommendation": "Re-run the scan when the target is accessible or verify HTTPS redirection manually."
+    }
+  },
+
+  "Weak CSP directive": {
+    "found": {
+      "description": "The Content Security Policy contains unsafe directives such as 'unsafe-inline' or 'unsafe-eval'.",
+      "evidence": "This was observed directly in the response headers.",
+      "impact": "This increases the risk of cross-site scripting attacks.",
+      "recommendation": "Use a strict policy such as default-src 'self' where possible."
+    },
+    "inconclusive": {
+      "description": "The Content Security Policy (CSP) check could not be completed.",
+      "reason": "The CSP header or policy could not be reliably detected or parsed.",
+      "recommendation": "Re-run the scan when the target is accessible or manually inspect the Content Security Policy configuration."
+    }
+  },
+
+  "Overly permissive CORS policy": {
+    "found": {
+      "description": "The application allows cross-origin requests from any domain.",
+      "evidence": "The Access-Control-Allow-Origin header was set to '*'.",
+      "impact": "This increases the risk of data exposure and abuse.",
+      "recommendation": "Restrict CORS to trusted domains only."
+    },
+    "inconclusive": {
+      "description": "The permissiveness of the Cross-Origin Resource Sharing (CORS) policy could not be completed.",
+      "reason": "The server did not return a response suitable for evaluating CORS behavior.",
+      "recommendation": "Re-run the scan when the target is accessible or manually test CORS configuration."
+    }
+  },
+
+  "Server error response": {
+    "found": {
+      "description": "There was a failure while processing the request.",
+      "evidence": "The application responded with an HTTP 5xx status code.",
+      "impact": "Repeated errors can expose internal behavior or cause denial of service.",
+      "recommendation": "Investigate server-side logs to identify the root cause."
+    },
+    "inconclusive": {
+      "description": "The HTTP status code check could not be completed.",
+      "reason": "The server response did not include a valid or expected HTTP status code.",
+      "recommendation": "Re-run the scan when the target is accessible or manually verify server responses."
+    }
+  },
+
+  "Missing security header(s)": {
+    "found": {
+      "description": "One or more recommended HTTP security headers are not present in the server response.",
+      "evidence": "The HTTP response did not include the expected security header(s).",
+      "impact": "The application may be more vulnerable to attacks such as XSS, clickjacking, or data leakage.",
+      "recommendation": "Add the missing security header(s) with appropriate values."
+    },
+    "inconclusive": {
+      "description": "The security headers check could not be completed.",
+      "reason": "The server response could not be reliably retrieved or analyzed.",
+      "recommendation": "Re-run the scan when the target is accessible or manually verify security headers using a trusted tool."
+    }
+  },
+
+  "Insecure cookie attributes": {
+    "found": {
+      "description": "One or more cookies are set without one or more of the following: Secure, HttpOnly, and SameSite attribute.",
+      "evidence": "The Set-Cookie header was observed without one or more of the attribute mentioned above.",
+      "impact": "Insecure cookie attributes may allow attackers to intercept, access, or misuse sensitive session data.",
+      "recommendation": "Set Secure, HttpOnly, and appropriate SameSite attributes on all session and sensitive cookies."
+    },
+    "inconclusive": {
+      "description": "The cookie security check could not be completed.",
+      "reason": "Cookies could not be reliably extracted or analyzed from the server response.",
+      "recommendation": "Re-run the scan when the target is accessible or manually inspect cookie attributes."
+    }
+  },
+
+  "robots.txt missing": {
+    "found": {
+      "description": "The application does not provide a robots.txt file at the expected location.",
+      "evidence": "A request to /robots.txt did not return a valid file.",
+      "impact": "Search engines and automated crawlers may index sensitive or unintended application paths.",
+      "recommendation": "Add a robots.txt file to define allowed and disallowed paths for web crawlers."
+    },
+    "inconclusive": {
+      "description": "The robots.txt file check could not be completed.",
+      "reason": "The robots.txt file could not be retrieved or analyzed.",
+      "recommendation": "Re-run the scan when the target is accessible or manually request the robots.txt file."
+    }
+  },
+
+  "Sensitive file(s) exposed": {
+    "found": {
+      "description": "A potentially sensitive file is accessible without authentication.",
+      "evidence": "A request to a known sensitive file path returned an accessible response.",
+      "impact": "Exposed files may reveal confidential information such as credentials, internal configuration, or application logic.",
+      "recommendation": "Remove sensitive files from public access or restrict them using proper access controls."
+    },
+    "inconclusive": {
+      "description": "The file exposure check could not be completed.",
+      "reason": "Potential file paths could not be reliably requested or evaluated.",
+      "recommendation": "Re-run the scan when the target is accessible or manually check for exposed sensitive files."
+    }
+  },
+
+  "Technology disclosure": {
+    "found": {
+      "description": "The application discloses information about underlying technologies through HTTP headers or response content.",
+      "evidence": "Technology identifiers such as meta and http-equiv tags were observed in response headers or page content.",
+      "impact": "Exposed technology details may assist attackers in fingerprinting the application and targeting known vulnerabilities.",
+      "recommendation": "Remove or obscure unnecessary technology disclosures from HTTP headers and response content."
+    },
+    "inconclusive": {
+      "description": "The exposed metadata check could not be completed.",
+      "reason": "Metadata could not be reliably extracted or parsed from server responses.",
+      "recommendation": "Re-run the scan when the target is accessible or manually inspect responses for metadata exposure."
+    }
+  },
+
+  "Comments": {
+    "found": {
+      "description": "Comments were found within the HTML or client-side code.",
+      "evidence": "HTML or JavaScript comments were detected in the response content.",
+      "impact": "Comments may reveal sensitive information such as internal logic, endpoints, or developer notes useful to an attacker.",
+      "recommendation": "Remove non-essential comments from production code before deployment."
+    },
+    "inconclusive": {
+      "description": "The comments check could not be completed.",
+      "reason": "Response content could not be reliably retrieved or analyzed for comments.",
+      "recommendation": "Re-run the scan when the target is accessible or manually inspect page source for comments."
+    }
+  },
+
+  "Insecure forms": {
+    "found": {
+      "description": "One or more state-changing forms do not include an anti-CSRF token.",
+      "evidence": "Form submissions were observed without a unique CSRF token parameter.",
+      "impact": "The application may be vulnerable to cross-site request forgery attacks that cause unintended actions on behalf of authenticated users.",
+      "recommendation": "Implement and validate unique, unpredictable CSRF tokens for all state-changing requests."
+    },
+    "inconclusive": {
+      "description": "The insecure forms check could not be completed.",
+      "reason": "Form elements could not be reliably identified or evaluated.",
+      "recommendation": "Re-run the scan when the target is accessible or manually review forms for insecure configurations."
+    }
+  },
+
+  "Mixed content": {
+    "found": {
+      "description": "The application loads resources over insecure HTTP while being served over HTTPS.",
+      "evidence": "Insecure HTTP resources were referenced within an HTTPS page.",
+      "impact": "Mixed content can undermine transport security and allow attackers to intercept or modify loaded resources.",
+      "recommendation": "Ensure all resources are loaded over HTTPS and remove or replace insecure references."
+    },
+    "inconclusive": {
+      "description": "The mixed content check could not be completed.",
+      "reason": "Page resources could not be reliably retrieved or analyzed for insecure content.",
+      "recommendation": "Re-run the scan when the target is accessible or manually inspect pages for mixed content."
+    }
+  },
+
+  "Sensitive endpoint discovered": {
+    "found": {
+      "description": "An application endpoint that may expose sensitive functionality or data was discovered.",
+      "evidence": "A request to a sensitive or administrative endpoint returned an accessible response.",
+      "impact": "Exposed endpoints may allow unauthorized access to sensitive operations or information.",
+      "recommendation": "Restrict access to sensitive endpoints using authentication, authorization, or network-level controls."
+    },
+    "inconclusive": {
+      "description": "The exposed endpoints check could not be completed.",
+      "reason": "Application endpoints could not be reliably discovered or evaluated.",
+      "recommendation": "Re-run the scan when the target is accessible or manually review application endpoints."
+    }
+  },
+
+  "Open redirects": {
+    "found": {
+      "description": "The application performs redirection based on user-controlled input without sufficient validation.",
+      "evidence": "A crafted request caused the application to redirect to an arbitrary external URL.",
+      "impact": "Open redirects can be abused for phishing attacks or to facilitate other social engineering techniques.",
+      "recommendation": "Validate and restrict redirection targets to a predefined list of trusted destinations."
+    },
+    "inconclusive": {
+      "description": "The open redirect check could not be completed.",
+      "reason": "Redirect behavior could not be reliably tested or confirmed.",
+      "recommendation": "Re-run the scan when the target is accessible or manually test redirect parameters."
+    }
+  },
+
+  "Third party integration": {
+    "found": {
+      "description": "The application integrates with third-party services or loads external resources.",
+      "evidence": "References to external domains or third-party scripts were observed in the response content.",
+      "impact": "Third-party integrations may introduce supply chain risks or affect application security and privacy.",
+      "recommendation": "Review third-party integrations for security risks and apply integrity, access, and trust controls where appropriate."
+    },
+    "inconclusive": {
+      "description": "The third-party integrations check could not be completed.",
+      "reason": "External resources or integrations could not be reliably identified or analyzed.",
+      "recommendation": "Re-run the scan when the target is accessible or manually review third-party dependencies."
+    }
+  },
+
+  "Inline JavaScript": {
+    "found": {
+      "description": "Inline JavaScript code is present within the application’s HTML responses.",
+      "evidence": "JavaScript code was detected directly within HTML elements or script tags without external sourcing.",
+      "impact": "Inline JavaScript can increase the risk of cross-site scripting (XSS) and complicate the enforcement of strong Content Security Policies.",
+      "recommendation": "Move inline JavaScript to external files and enforce a strict Content Security Policy."
+    },
+    "inconclusive": {
+      "description": "The inline JavaScript check could not be completed.",
+      "reason": "JavaScript content could not be reliably retrieved or analyzed.",
+      "recommendation": "Re-run the scan when the target is accessible or manually inspect pages for inline JavaScript."
+    }
+  },
+  "SSL certificate status": {
+    "inconclusive": {
+      "description": "The SSL certificate could not be retrieved or analyzed.",
+      "reason": "The SSL certificate could not be successfully obtained or processed during the scan.",
+      "recommendation": "Re-run the scan when the target is accessible or manually verify the SSL certificate configuration."
+    },
+
+    "found": {
+      "valid_long": {
+        "description": "The SSL certificate is valid and will expire in over 30 days.",
+        "impact": "If the SSL certificate is not renewed before the expiry date, encrypted communications may be disrupted.",
+        "recommendation": "Continue monitoring the certificate expiration date and plan renewal ahead of time."
+      },
+      "expiring_soon": {
+        "description": "The SSL certificate will expire in less than 30 days.",
+        "impact": "If the SSL certificate expires, user data may become vulnerable and browsers will display security warnings.",
+        "recommendation": "Begin the SSL certificate renewal process immediately."
+      },
+      "expired": {
+        "description": "The SSL certificate has expired and is no longer effective.",
+        "impact": "User data is vulnerable to interception and browsers will warn users that the site is unsafe.",
+        "recommendation": "Renew the SSL certificate immediately and ensure automated renewal is configured."
+      }
+    }
+  }
+}
